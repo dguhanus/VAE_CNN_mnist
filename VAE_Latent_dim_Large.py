@@ -61,6 +61,7 @@ class CustomVariationalLayer(keras.layers.Layer):
         x = K.flatten(x)
         z_decoded = K.flatten(z_decoded)
         xent_loss = keras.metrics.mae(x, z_decoded)
+        #xent_loss = keras.metrics.binary_crossentropy(x, x_decoded_mean)
         kl_loss = -5e-4 * K.mean(
         1 + z_log_var - K.square(z_mean) - K.exp(z_log_var), axis=-1)
         return K.mean(xent_loss + kl_loss)
